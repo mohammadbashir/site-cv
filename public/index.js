@@ -42,7 +42,7 @@ cv_data['contact'] = {
 		{
 			'img': 'images/phone.jpg',
 			'title': 'Phone',
-			'subtitle': '+961 3 045202'
+			'subtitle': '+961 3 045292'
 		}
 		,
 		{
