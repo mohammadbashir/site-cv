@@ -220,6 +220,14 @@ cv_data['apps'] = {
 			'subtitle': '',
 			'items': [
 				{
+					'img': 'images/linksvip.png',
+					'title': 'Links VIP',
+					'subtitle': "The Only Link You'll Ever Need",
+					'getButtonTitle': 'GET',
+					'href': 'https://apps.apple.com/us/app/shower-thought/id1508274773'
+				}
+				,
+				{
 					'img': 'images/showerthought.jpg',
 					'title': 'Shower Thought',
 					'subtitle': 'Sudden Mind-Blowing Thoughts',
@@ -275,14 +283,14 @@ cv_data['apps'] = {
 let bannerDataArray = [
 
 	{
-		'title': 'Pega Ceritification',
-		'subtitle': 'Ceritified System Architect • 2018',
+		'title': 'Pega Certification',
+		'subtitle': 'Certified System Architect • 2018',
 		'img': 'images/banner-pega.jpg'
 	}
 	,
 	{
-		'title': 'Mindbreeze Ceritification',
-		'subtitle': 'Mindbreeze Expert Ceritification • 2020',
+		'title': 'Mindbreeze Certification',
+		'subtitle': 'Mindbreeze Expert Certification • 2020',
 		'img': 'images/banner-mindbreeze.jpg'
 	}
 ]
