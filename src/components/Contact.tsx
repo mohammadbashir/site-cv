@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Mail, Download, Linkedin, MapPin } from 'lucide-react';
+import { Mail, FileText, Linkedin, MapPin } from 'lucide-react';
 import cvPdf from '../assets/Mohamad_Bachir_Sidani_CV.pdf';
 
 export default function Contact() {
@@ -42,10 +42,11 @@ export default function Contact() {
           </a>
           <a
             href={cvPdf}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="group flex items-center gap-3 px-10 py-5 rounded-full text-white/80 text-xl font-medium border-2 border-white/20 hover:border-purple-500/50 hover:bg-white/5 transition-all"
           >
-            <Download size={24} className="group-hover:scale-110 transition-transform" />
+            <FileText size={24} className="group-hover:scale-110 transition-transform" />
             Download CV
           </a>
         </motion.div>

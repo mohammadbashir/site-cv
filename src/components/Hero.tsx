@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Download } from 'lucide-react';
+import { ArrowDown, FileText } from 'lucide-react';
 import profileImage from '../assets/profile.jpg';
 import cvPdf from '../assets/Mohamad_Bachir_Sidani_CV.pdf';
 
@@ -136,10 +136,11 @@ export default function Hero() {
               </a>
               <a
                 href={cvPdf}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-2 px-7 py-3 rounded-full text-white/80 text-base font-medium border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all"
               >
-                <Download size={18} className="group-hover:scale-110 transition-transform" />
+                <FileText size={18} className="group-hover:scale-110 transition-transform" />
                 Download CV
               </a>
             </motion.div>
