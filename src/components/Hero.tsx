@@ -5,7 +5,7 @@ import cvPdf from '../assets/Mohamad_Bachir_Sidani_CV.pdf';
 
 export default function Hero() {
   return (
-    <section className="h-screen flex flex-col justify-center relative overflow-hidden bg-grid">
+    <section className="min-h-screen md:h-screen flex flex-col justify-center relative overflow-hidden bg-grid pt-24 pb-16 md:pt-0 md:pb-0">
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -52,11 +52,11 @@ export default function Hero() {
                   filter: 'blur(20px)',
                 }}
               />
-              <div className="relative w-[240px] h-[240px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden border-2 border-white/10">
+              <div className="relative w-[220px] h-[220px] sm:w-[240px] sm:h-[240px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden border-2 border-white/10">
                 <img
                   src={profileImage}
                   alt="Mohamad Bachir Sidani"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
                 />
               </div>
             </div>
@@ -71,9 +71,9 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 leading-tight"
             >
-              <span className="text-white">Mohamad</span>
+              <span className="text-white">Mohamad Bachir</span>
               <br />
-              <span className="gradient-text">Bachir</span>
+              <span className="gradient-text">Sidani</span>
             </motion.h1>
 
             {/* Title */}
@@ -106,11 +106,12 @@ export default function Hero() {
               className="flex flex-wrap justify-center lg:justify-start gap-3 mb-10"
             >
               {[
-                '11 Years',
-                'Scrum Master',
-                'System Architect',
-                'iOS Developer',
-                'Pega Certified',
+                '10 Years at Murex',
+                '11 Years iOS Lead',
+                'Scaled Scrum Master',
+                'PEGA System Architect',
+                'Enterprise FinTech',
+                '10+ Published Apps',
               ].map((tag) => (
                 <span
                   key={tag}
@@ -153,7 +154,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+        className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.a
           href="#highlights"
