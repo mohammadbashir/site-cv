@@ -1,0 +1,24 @@
+{
+  "name": "Mohamad Bachir Sidani",
+  "short_name": "M.B. Sidani",
+  "description": "Senior Software Engineer & Pega Architect at Murex Lebanon. Production AI integrations with Claude and MCP. iOS Tech Lead.",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#F1ECDD",
+  "background_color": "#F1ECDD",
+  "display": "minimal-ui"
+}

@@ -1,110 +1,103 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Mail, FileText, Linkedin, MapPin } from 'lucide-react';
+import { ArrowUpRight, Download } from 'lucide-react';
 import cvPdf from '../assets/Mohamad_Bachir_Sidani_CV.pdf';
+import { profile, links } from '../data/profile';
 
 export default function Contact() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+
+  const linkRows = [
+    { label: 'Email', href: links.email, value: profile.emailDisplay, external: false },
+    { label: 'Phone', href: links.phone, value: profile.phoneDisplay, external: false },
+    { label: 'LinkedIn', href: links.linkedin, value: 'linkedin.com/in/mohamadbachir', external: true },
+    { label: 'App Store', href: links.appStore, value: 'View shipped apps', external: true },
+  ];
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6 text-center" ref={ref}>
-        {/* Section title */}
+    <section id="contact" className="py-16 md:py-24 bg-[color:var(--color-paper-deep)]">
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-12"
+          ref={ref}
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="text-white">Let's</span>{' '}
-            <span className="gradient-text">Talk</span>
-          </h2>
-          <p className="text-xl md:text-2xl text-white/40 max-w-xl mx-auto">
-            Ready to bring your next project to life? I'd love to hear from you.
-          </p>
-        </motion.div>
+          <div className="mb-6">
+            <span className="label-mono">Contact</span>
+          </div>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-        >
-          <a
-            href="mailto:mohamadbachir.sidani@gmail.com"
-            className="group btn-gradient px-10 py-5 rounded-full text-white text-xl font-semibold flex items-center gap-3"
-          >
-            <Mail size={24} className="group-hover:scale-110 transition-transform relative z-10" />
-            <span className="relative z-10">Send Email</span>
-          </a>
-          <a
-            href={cvPdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 px-10 py-5 rounded-full text-white/80 text-xl font-medium border-2 border-white/20 hover:border-purple-500/50 hover:bg-white/5 transition-all"
-          >
-            <FileText size={24} className="group-hover:scale-110 transition-transform" />
-            Download CV
-          </a>
-        </motion.div>
+          <hr className="rule-hair mb-2" />
 
-        {/* Social links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex items-center justify-center gap-6 mb-12"
-        >
-          <a
-            href="https://linkedin.com/in/mohamadbachir"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative p-4 rounded-full bg-white/5 border border-white/10 hover:border-purple-500/40 hover:bg-white/10 transition-all group"
-          >
-            <Linkedin size={24} className="text-white/60 group-hover:text-purple-300 transition-colors" />
-          </a>
-          <a
-            href="mailto:mohamadbachir.sidani@gmail.com"
-            className="relative p-4 rounded-full bg-white/5 border border-white/10 hover:border-purple-500/40 hover:bg-white/10 transition-all group"
-          >
-            <Mail size={24} className="text-white/60 group-hover:text-purple-300 transition-colors" />
-          </a>
-        </motion.div>
+          <dl className="divide-y divide-[color:var(--color-rule)] max-w-2xl">
+            {linkRows.map((row) => {
+              const isPlaceholder = row.href.startsWith('#TODO') || row.href.includes('TODO');
+              return (
+                <div
+                  key={row.label}
+                  className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-6 py-3.5 items-baseline"
+                >
+                  <dt className="font-mono text-[0.72rem] tracking-[0.2em] uppercase text-[color:var(--color-ink-mute)]">
+                    {row.label}
+                  </dt>
+                  <dd>
+                    {isPlaceholder ? (
+                      <span className="font-body italic text-[color:var(--color-ink-faint)] text-base">
+                        {row.value} (link pending)
+                      </span>
+                    ) : (
+                      <a
+                        href={row.href}
+                        target={row.external ? '_blank' : undefined}
+                        rel={row.external ? 'noopener noreferrer' : undefined}
+                        className="link-bare font-body text-base inline-flex items-center gap-1.5"
+                      >
+                        {row.value}
+                        {row.external ? (
+                          <ArrowUpRight size={13} className="text-[color:var(--color-ink-faint)]" />
+                        ) : null}
+                      </a>
+                    )}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
 
-        {/* Location */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex items-center justify-center gap-2 text-white/30"
-        >
-          <MapPin size={16} />
-          <span>Beirut, Lebanon</span>
-          <span className="mx-2">|</span>
-          <span>English & Arabic</span>
-        </motion.div>
+          <div className="mt-10 max-w-2xl">
+            <a
+              href={cvPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-resume group inline-flex items-center gap-2.5 px-6 py-3 bg-[color:var(--color-accent-red)] text-[color:var(--color-paper)] hover:bg-[color:var(--color-accent-red-hover)] font-body text-base font-medium"
+            >
+              <Download
+                size={15}
+                strokeWidth={1.8}
+                className="transition-transform duration-300 ease-out group-hover:translate-y-[2px]"
+              />
+              <span>Download résumé</span>
+            </a>
+          </div>
 
-        {/* Footer separator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-24 mb-8"
-        >
-          <div className="h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
-        </motion.div>
+          <div className="mt-10 max-w-2xl">
+            <p
+              className="font-headline italic text-xl md:text-[1.4rem] text-[color:var(--color-accent-red)] leading-snug mb-3"
+              style={{ fontVariationSettings: "'opsz' 36, 'wght' 400" }}
+            >
+              {profile.availability}
+            </p>
+            <p className="font-mono text-[0.72rem] tracking-[0.18em] uppercase text-[color:var(--color-ink-mute)]">
+              {profile.geographySignal}
+            </p>
+            <p className="font-mono text-[0.72rem] tracking-[0.18em] uppercase text-[color:var(--color-ink-faint)] mt-1">
+              {profile.languages}
+            </p>
+          </div>
 
-        {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <p className="text-white/40 text-sm">
-            © 2026 Mohamad Bachir Sidani
+          <p className="font-mono text-[0.65rem] tracking-[0.22em] uppercase text-[color:var(--color-ink-faint)] mt-20">
+            © 2026 {profile.name}
           </p>
         </motion.div>
       </div>
