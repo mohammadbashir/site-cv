@@ -4,8 +4,8 @@ import { createHash } from 'node:crypto';
 const HOUR_MS = 60 * 60 * 1000;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-const HOURLY_LIMIT = 5;
-const DAILY_LIMIT = 30;
+const HOURLY_LIMIT = 15;
+const DAILY_LIMIT = 60;
 
 export function ipHash(rawIp: string): string {
   return createHash('sha256').update(rawIp + '|mbs-cv-salt').digest('hex').slice(0, 24);
@@ -29,7 +29,9 @@ export type RateResult =
  * Each call atomically increments the appropriate counters.
  */
 export async function checkAndIncrementRate(ipHashId: string): Promise<RateResult> {
-  const db = getFirestore();
+  // Project's (default) database is in Datastore mode and unusable by the
+  // Admin SDK; use the named Native-mode database instead.
+  const db = getFirestore('mbs-cv');
   const ref = db.collection('chat_rate').doc(ipHashId);
   const now = Date.now();
 

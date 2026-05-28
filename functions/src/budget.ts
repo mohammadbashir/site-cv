@@ -1,8 +1,8 @@
 import { getFirestore } from 'firebase-admin/firestore';
 
 // Daily ceiling on total requests across all IPs. At gpt-4o-mini pricing,
-// 500 requests ~= $0.10 worst case. Resets at UTC midnight.
-const DAILY_CEILING = 500;
+// 750 requests ~= $0.15 worst case. Resets at UTC midnight.
+const DAILY_CEILING = 750;
 
 function todayUtcKey(): string {
   const d = new Date();
@@ -19,7 +19,8 @@ export type BudgetResult =
  */
 export async function checkAndIncrementBudget(): Promise<BudgetResult> {
   const key = todayUtcKey();
-  const db = getFirestore();
+  // Named Native-mode database ((default) is Datastore mode, unusable here).
+  const db = getFirestore('mbs-cv');
   const ref = db.collection('chat_budget').doc(key);
 
   return db.runTransaction(async (tx) => {

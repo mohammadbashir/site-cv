@@ -4,16 +4,14 @@ export type Certification = {
   href?: string;
 };
 
-// NOTE: Pega cert verify URLs below are placeholders. Replace with the real
-// Credly badge URLs once the certificates are live in your Credly profile.
 export const certifications: Certification[] = [
   {
     name: 'Pega Certified System Architect (CSA)',
-    href: 'https://www.credly.com/users/mohamad-bachir-sidani/badges',
+    href: 'https://academy.pega.com/verify-certification?email=mohammadbashir.sidani%40murex.com',
   },
   {
     name: 'Pega Certified Senior System Architect (CSSA)',
-    href: 'https://www.credly.com/users/mohamad-bachir-sidani/badges',
+    href: 'https://academy.pega.com/verify-certification?email=mohammadbashir.sidani%40murex.com',
   },
   {
     name: 'Pega Lead System Architect (LSA)',
