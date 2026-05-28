@@ -18,16 +18,15 @@ export const selectedWork: WorkEntry[] = [
     context: 'Murex Lebanon',
     period: '2016 to present',
     description:
-      "Architect for Murex's two internal CRM platforms, the tools customer-service and sales teams use to support a global client base of 300-plus banks and financial institutions in 65 countries. The Customer Service CRM was built from scratch on Pega over a two-year cycle and runs in production today, covering Projects, Cases, Solutions, and User Administration. The Sales CRM, originally a Pega-based product Murex acquired, was extended for the sales and business-development side of the organisation: companies, opportunities, and internal sales workflows. Internal subject-matter expert for CRM development tools, with seamless version upgrades from Pega 8 through 25 and dedicated Playwright suites achieving 100% coverage of main business objects on both platforms. Most recently, designed and shipped a sanctioned production MCP server letting Claude agents read live Pega Sales data to summarize opportunities and surface comparisons to similar past deals, orchestrated via n8n agent workflows.",
+      "Architect for Murex's two internal CRM platforms, the tools customer-service and sales teams use to support a global client base of 300-plus banks and financial institutions in 65 countries. The Customer Service CRM was built from scratch on Pega over a two-year cycle and runs in production today, covering Projects, Cases, Solutions, and User Administration. The Sales CRM, originally a Pega-based product Murex acquired, was extended for the sales and business-development side of the organisation: companies, opportunities, and internal sales workflows. Internal subject-matter expert for CRM development tools, with seamless version upgrades from Pega 8 through 25 and dedicated Playwright suites achieving 100% coverage of main business objects on both platforms. Also designed and shipped Murex's first production AI integration on top of the Sales CRM: a sanctioned MCP server bringing AI-driven opportunity summarization and similar-deal comparison into sales workflows.",
     pullQuote:
-      'Two enterprise CRM platforms, plus a Claude integration on top of them through Model Context Protocol.',
+      'Two enterprise CRM platforms: one built from scratch on Pega, one extended on top of it.',
     factbox: [
       'Two CRM platforms',
       '300+ client banks',
       '60,000+ daily users',
       'Pega 7 through 25',
       '100% Playwright coverage',
-      'MCP + Claude integration',
       'Internal SME',
     ],
     isLead: true,

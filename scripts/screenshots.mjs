@@ -40,7 +40,16 @@ for (const bp of breakpoints) {
   const page = await ctx.newPage();
   await page.goto(url, { waitUntil: 'networkidle' });
   await page.addStyleTag({ content: forceVisibleCss });
-  await page.waitForTimeout(500);
+  // Also force CSS-animation-controlled and IntersectionObserver-revealed elements visible
+  await page.addStyleTag({
+    content: `
+      .cover-name .line .inner, .cover-eyebrow, .cover-foot, .portrait-cap, .nav-mark, .nav-action {
+        opacity: 1 !important; transform: none !important; animation: none !important;
+      }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    `,
+  });
+  await page.waitForTimeout(2400);
 
   await page.screenshot({
     path: `${outDir}/${bp.name}-fold.png`,

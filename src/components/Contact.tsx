@@ -1,12 +1,9 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { ArrowUpRight, Download } from 'lucide-react';
-import cvPdf from '../assets/Mohamad_Bachir_Sidani_CV.pdf';
 import { profile, links } from '../data/profile';
+import { useInViewReveal } from '../hooks/useInViewReveal';
 
 export default function Contact() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const { ref, inView } = useInViewReveal<HTMLDivElement>();
 
   const linkRows = [
     { label: 'Email', href: links.email, value: profile.emailDisplay, external: false },
@@ -16,21 +13,14 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-[color:var(--color-paper-deep)]">
+    <section id="contact" className="py-16 md:py-24 bg-[color:var(--bg-2)]">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div ref={ref} className={`reveal ${inView ? 'in' : ''}`}>
           <div className="mb-6">
-            <span className="label-mono">Contact</span>
+            <span className="section-label">Contact</span>
           </div>
-
           <hr className="rule-hair mb-2" />
-
-          <dl className="divide-y divide-[color:var(--color-rule)] max-w-2xl">
+          <dl className="divide-y divide-[color:var(--rule)] max-w-2xl">
             {linkRows.map((row) => {
               const isPlaceholder = row.href.startsWith('#TODO') || row.href.includes('TODO');
               return (
@@ -38,12 +28,12 @@ export default function Contact() {
                   key={row.label}
                   className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-6 py-3.5 items-baseline"
                 >
-                  <dt className="font-mono text-[0.72rem] tracking-[0.2em] uppercase text-[color:var(--color-ink-mute)]">
+                  <dt className="font-mono text-[0.72rem] tracking-[0.2em] uppercase text-[color:var(--ink-3)]">
                     {row.label}
                   </dt>
                   <dd>
                     {isPlaceholder ? (
-                      <span className="font-body italic text-[color:var(--color-ink-faint)] text-base">
+                      <span className="font-serif italic text-[color:var(--ink-3)] text-base">
                         {row.value} (link pending)
                       </span>
                     ) : (
@@ -51,11 +41,11 @@ export default function Contact() {
                         href={row.href}
                         target={row.external ? '_blank' : undefined}
                         rel={row.external ? 'noopener noreferrer' : undefined}
-                        className="link-bare font-body text-base inline-flex items-center gap-1.5"
+                        className="link-bare font-serif text-base inline-flex items-center gap-1.5"
                       >
                         {row.value}
                         {row.external ? (
-                          <ArrowUpRight size={13} className="text-[color:var(--color-ink-faint)]" />
+                          <ArrowUpRight size={13} className="text-[color:var(--ink-3)]" />
                         ) : null}
                       </a>
                     )}
@@ -66,40 +56,31 @@ export default function Contact() {
           </dl>
 
           <div className="mt-10 max-w-2xl">
-            <a
-              href={cvPdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-resume group inline-flex items-center gap-2.5 px-6 py-3 bg-[color:var(--color-accent-red)] text-[color:var(--color-paper)] hover:bg-[color:var(--color-accent-red-hover)] font-body text-base font-medium"
-            >
-              <Download
-                size={15}
-                strokeWidth={1.8}
-                className="transition-transform duration-300 ease-out group-hover:translate-y-[2px]"
-              />
+            <a href="/cv" target="_blank" rel="noopener noreferrer" className="cta-resume">
+              <Download size={15} strokeWidth={1.8} />
               <span>Download résumé</span>
             </a>
           </div>
 
           <div className="mt-10 max-w-2xl">
             <p
-              className="font-headline italic text-xl md:text-[1.4rem] text-[color:var(--color-accent-red)] leading-snug mb-3"
-              style={{ fontVariationSettings: "'opsz' 36, 'wght' 400" }}
+              className="font-serif italic text-xl md:text-[1.4rem] leading-snug mb-3"
+              style={{ color: 'var(--accent)', fontWeight: 400, fontVariationSettings: "'opsz' 36" }}
             >
               {profile.availability}
             </p>
-            <p className="font-mono text-[0.72rem] tracking-[0.18em] uppercase text-[color:var(--color-ink-mute)]">
+            <p className="font-mono text-[0.72rem] tracking-[0.18em] uppercase text-[color:var(--ink-3)]">
               {profile.geographySignal}
             </p>
-            <p className="font-mono text-[0.72rem] tracking-[0.18em] uppercase text-[color:var(--color-ink-faint)] mt-1">
+            <p className="font-mono text-[0.72rem] tracking-[0.18em] uppercase text-[color:var(--ink-3)] mt-1">
               {profile.languages}
             </p>
           </div>
 
-          <p className="font-mono text-[0.65rem] tracking-[0.22em] uppercase text-[color:var(--color-ink-faint)] mt-20">
+          <p className="font-mono text-[0.65rem] tracking-[0.22em] uppercase text-[color:var(--ink-3)] mt-20">
             © 2026 {profile.name}
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

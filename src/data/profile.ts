@@ -11,8 +11,8 @@ export const links = {
 export const profile = {
   name: 'Mohamad Bachir Sidani',
   title: 'Senior Software Engineer & Scrum Master',
-  deck: 'Ten years at Murex Lebanon, architecting two Pega-based enterprise CRM platforms plus production AI agents on top of them with Claude, OpenAI, Ollama, and Model Context Protocol. Scrum Master for a five-engineer team. Building À La Menu in parallel, plus eleven years of independent iOS work.',
-  currentlyLine: 'Currently architecting Murex CRM platforms and Claude / MCP integrations on top of Pega Sales.',
+  deck: 'Ten years at Murex Lebanon, architecting two Pega-based enterprise CRM platforms used internally to support 300+ banks and 60,000+ daily users. Scrum Master for a five-engineer team. Building À La Menu in parallel, plus eleven years of independent iOS work.',
+  currentlyLine: 'Currently architecting Murex CRM platforms, upgrading across Pega 8 to 25.',
   dateline: ['Beirut', 'Software engineer', 'Scrum master at Murex', 'iOS since 2015'],
   location: 'Beirut, Lebanon',
   geographySignal: 'Open to remote work or relocation. Currently in Beirut.',

@@ -30,7 +30,7 @@ const html = `<!doctype html>
     --ink-mute: #6E6457;
     --ink-faint: #9C927F;
     --rule: #C4BBA8;
-    --accent-red: #A0322D;
+    --accent-red: oklch(0.55 0.15 60);
   }
 
   html, body {
@@ -138,9 +138,9 @@ const html = `<!doctype html>
     <div class="eyebrow">The Profile</div>
     <h1 class="name">Mohamad Bachir<br/>Sidani</h1>
     <div class="rule"></div>
-    <p class="deck">Senior Software Engineer &amp; Pega Architect at Murex Lebanon. Production AI integrations with Claude and MCP. iOS Tech Lead.</p>
+    <p class="deck">Senior Software Engineer &amp; Pega Architect at Murex Lebanon. Two CRM platforms for 300+ banks, a production MCP/AI integration, 11 years of iOS.</p>
     <div class="tagline">
-      <span>Pega CSSA</span><span>MCP</span><span>Claude</span><span>iOS</span><span>Beirut</span>
+      <span>Pega Architect</span><span>AI · MCP</span><span>Scrum Master</span><span>Beirut</span>
     </div>
   </div>
 </body>

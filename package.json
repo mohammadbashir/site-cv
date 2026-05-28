@@ -13,10 +13,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/geist": "^5.2.8",
+    "@fontsource-variable/geist-mono": "^5.2.7",
     "@fontsource-variable/newsreader": "^5.2.10",
-    "@fontsource/fraunces": "^5.2.9",
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/jetbrains-mono": "^5.2.8",
     "framer-motion": "^12.23.26",
     "lucide-react": "^0.560.0",
     "react": "^19.2.0",

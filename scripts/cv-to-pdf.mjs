@@ -2,7 +2,7 @@
 // using Playwright and a print-styled HTML template.
 
 import { chromium } from 'playwright';
-import { readFileSync } from 'node:fs';
+import { readFileSync, copyFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { marked } from 'marked';
 
@@ -162,3 +162,9 @@ if (process.env.DEBUG_SCREENSHOT) {
 
 await browser.close();
 console.log(`PDF written to ${outputPath}`);
+
+// Mirror to the public path served at /cv so the site and the shareable URL
+// stay in sync with the canonical CV.
+const publicCopy = resolve(projectRoot, 'public/cv.pdf');
+copyFileSync(outputPath, publicCopy);
+console.log(`PDF copied to ${publicCopy}`);

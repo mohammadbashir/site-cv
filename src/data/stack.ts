@@ -19,13 +19,11 @@ export const stack: StackGroup[] = [
   {
     label: 'AI & agents',
     items: [
-      'Anthropic Claude API',
-      'OpenAI / GPT API',
-      'Ollama (local-model inference)',
       'Model Context Protocol (MCP server design)',
       'Agentic development with n8n orchestration',
-      'Prompt engineering for production features',
-      'Two-plus years hands-on',
+      'Hosted LLM APIs and local-model inference',
+      'Prompt engineering',
+      'Two-plus years hands-on, across personal and sanctioned work',
     ],
   },
   {
