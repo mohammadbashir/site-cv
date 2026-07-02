@@ -16,6 +16,9 @@ dist-ssr
 screenshots
 .firebase
 
+# Private job-search workspace — never commit or deploy (repo is public)
+job-search/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

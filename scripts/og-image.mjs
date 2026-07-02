@@ -138,7 +138,7 @@ const html = `<!doctype html>
     <div class="eyebrow">The Profile</div>
     <h1 class="name">Mohamad Bachir<br/>Sidani</h1>
     <div class="rule"></div>
-    <p class="deck">Senior Software Engineer &amp; Pega Architect at Murex Lebanon. Two CRM platforms for 300+ banks, a production MCP/AI integration, 11 years of iOS.</p>
+    <p class="deck">Principal Engineer &amp; Pega Architect at Murex Lebanon. Two CRM platforms for 300+ banks, a production MCP/AI integration, 11 years of iOS.</p>
     <div class="tagline">
       <span>Pega Architect</span><span>AI · MCP</span><span>Scrum Master</span><span>Beirut</span>
     </div>

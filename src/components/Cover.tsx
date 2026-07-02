@@ -19,7 +19,7 @@ export default function Cover() {
       <div className="cover-stage">
         <div className="cover-eyebrow">
           <span className="bar" aria-hidden="true" />
-          <span>Senior Software Engineer · Pega Architect</span>
+          <span>Principal Engineer · Pega Architect</span>
         </div>
 
         <h1 className="cover-name">
@@ -38,13 +38,13 @@ export default function Cover() {
 
         <div className="cover-foot">
           <div className="cover-role">
-            10 years at Murex<br />
-            Two Pega CRM platforms<br />
-            300+ banks · 60,000+ daily users
+            Architect of two enterprise platforms<br />
+            300+ banks · 60,000+ daily users<br />
+            Led a 5-engineer Scrum team
           </div>
           <div className="cover-place">
-            Beirut<br />
-            Open to remote or relocation<br />
+            Beirut · remote-first<br />
+            Open to leadership & principal roles<br />
             Arabic · English
           </div>
         </div>

@@ -1,6 +1,6 @@
 # MOHAMAD BACHIR SIDANI
 
-**Senior Software Engineer · Scrum Master · Architect** (Pega CSSA, LSA in progress)
+**Principal Engineer · Pega Architect · Scrum Master** (Pega CSSA, LSA in progress)
 Beirut, Lebanon · +961 3 045 292 · mohamadbachir.sidani@gmail.com
 mohamadbachir.com · linkedin.com/in/mohamadbachir
 
@@ -8,7 +8,7 @@ mohamadbachir.com · linkedin.com/in/mohamadbachir
 
 ## Summary
 
-Senior software engineer at Murex Lebanon for ten years, currently architecting two enterprise CRM platforms used internally to support a global client base of 300+ banks and 60,000+ daily users across 65 countries. Pega Certified Senior System Architect with Lead System Architect in progress, Scrum Master for a five-engineer team, and building À La Menu independently in parallel.
+Principal engineer and architect with ten years at Murex Lebanon, where I own the end-to-end architecture of two enterprise CRM platforms used internally to support a global client base of 300+ banks and 60,000+ daily users across 65 countries. Pega Certified Senior System Architect with Lead System Architect in progress, Scrum Master leading a five-engineer team, and building À La Menu independently in parallel.
 
 ## Key Achievements
 
