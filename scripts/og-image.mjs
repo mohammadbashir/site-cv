@@ -1,13 +1,13 @@
 // Renders the Open Graph share image (1200x630) used for LinkedIn / Slack /
-// iMessage previews when mohamadbachir.com is shared. Keeps the editorial
-// look of the site itself.
+// iMessage previews when mohamadbachir.com is shared. Mirrors the site's
+// drafting-sheet identity: paper, dot grid, ink node boxes, one signal orange.
 
 import { chromium } from 'playwright';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const projectRoot = resolve(import.meta.dirname, '..');
-const photoBase64 = readFileSync(resolve(projectRoot, 'src/assets/profile.jpg')).toString('base64');
+const photoBase64 = readFileSync(resolve(projectRoot, 'src/assets/portrait.jpg')).toString('base64');
 const outputPath = resolve(projectRoot, 'public/og-image.png');
 
 const html = `<!doctype html>
@@ -17,20 +17,20 @@ const html = `<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap"
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap"
   rel="stylesheet"
 />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --paper: #F1ECDD;
-    --paper-deep: #E8E1CD;
-    --ink: #1F1812;
-    --ink-mute: #6E6457;
-    --ink-faint: #9C927F;
-    --rule: #C4BBA8;
-    --accent-red: oklch(0.55 0.15 60);
+    --paper: #f6f4ee;
+    --paper-2: #eeebe1;
+    --ink: #191511;
+    --ink-2: #4c4536;
+    --ink-3: #8b8270;
+    --rule: #d8d2c0;
+    --accent: oklch(0.55 0.16 50);
   }
 
   html, body {
@@ -43,106 +43,114 @@ const html = `<!doctype html>
   }
 
   body {
-    background-image:
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.18  0 0 0 0 0.13  0 0 0 0 0.07  0 0 0 0.10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-    background-size: 280px 280px;
-    background-repeat: repeat;
+    position: relative;
+    background-image: radial-gradient(rgba(25,21,17,0.09) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
     display: grid;
-    grid-template-columns: 360px 1fr;
+    grid-template-columns: 1fr 300px;
+    column-gap: 56px;
     align-items: center;
-    column-gap: 60px;
-    padding: 80px;
+    padding: 72px 80px;
   }
 
-  .photo-plate {
-    background: var(--paper-deep);
-    padding: 8px;
-    box-shadow:
-      0 0 0 1px var(--rule),
-      0 24px 40px -16px rgba(31, 24, 18, 0.18);
-  }
-
-  .photo-plate img {
-    display: block;
-    width: 320px;
-    height: 400px;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .content {
-    max-width: 700px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  .crop { position: absolute; width: 22px; height: 22px; }
+  .crop::before { content: ""; position: absolute; width: 100%; height: 2px; background: var(--ink-3); }
+  .crop::after { content: ""; position: absolute; width: 2px; height: 100%; background: var(--ink-3); }
+  .crop.tl { top: 26px; left: 26px; } .crop.tl::before { top: 0; left: 0; } .crop.tl::after { top: 0; left: 0; }
+  .crop.tr { top: 26px; right: 26px; } .crop.tr::before { top: 0; right: 0; } .crop.tr::after { top: 0; right: 0; }
+  .crop.bl { bottom: 26px; left: 26px; } .crop.bl::before { bottom: 0; left: 0; } .crop.bl::after { bottom: 0; left: 0; }
+  .crop.br { bottom: 26px; right: 26px; } .crop.br::before { bottom: 0; right: 0; } .crop.br::after { bottom: 0; right: 0; }
 
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--accent-red);
-    margin-bottom: 22px;
+    color: var(--ink-3);
+    margin-bottom: 18px;
   }
 
   .name {
-    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    margin-bottom: 26px;
+  }
+  .name .it { font-style: italic; color: var(--accent); }
+  .name .stop { color: var(--accent); font-weight: 400; }
+
+  .nodes {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 26px;
+  }
+  .node {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
     font-weight: 600;
-    font-size: 92px;
-    line-height: 0.96;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-    margin-bottom: 22px;
+    letter-spacing: 0.1em;
+    border: 2px solid var(--ink);
+    background: var(--paper-2);
+    padding: 12px 18px;
+    white-space: nowrap;
   }
-
-  .rule {
-    width: 96px;
-    height: 1.5px;
-    background: var(--accent-red);
-    margin-bottom: 22px;
-  }
-
-  .deck {
-    font-family: 'Newsreader', Georgia, serif;
-    font-style: italic;
-    font-size: 24px;
-    line-height: 1.4;
-    color: var(--ink);
-    margin-bottom: 32px;
-    max-width: 640px;
-  }
+  .node.accent { border-color: var(--accent); color: var(--accent); }
+  .wire { width: 34px; height: 2px; background: var(--ink-2); opacity: 0.6; }
 
   .tagline {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--ink-mute);
+    color: var(--ink-2);
   }
+  .tagline .sep { color: var(--accent); margin: 0 10px; }
 
-  .tagline span:not(:last-child)::after {
-    content: ' / ';
-    color: var(--ink-faint);
-    margin: 0 6px;
+  .portrait { justify-self: end; }
+  .portrait .ph {
+    width: 300px;
+    height: 300px;
+    border: 3px solid var(--ink);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.06) brightness(1.02);
+  }
+  .portrait .cap {
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex;
+    justify-content: space-between;
   }
 </style>
 </head>
 <body>
-  <div class="photo-plate">
-    <img src="data:image/jpeg;base64,${photoBase64}" alt="" />
-  </div>
+  <div class="crop tl"></div><div class="crop tr"></div><div class="crop bl"></div><div class="crop br"></div>
   <div class="content">
-    <div class="eyebrow">The Profile</div>
-    <h1 class="name">Mohamad Bachir<br/>Sidani</h1>
-    <div class="rule"></div>
-    <p class="deck">Principal Engineer &amp; Pega Architect at Murex Lebanon. Two CRM platforms for 300+ banks, a production MCP/AI integration, 11 years of iOS.</p>
-    <div class="tagline">
-      <span>Pega Architect</span><span>AI · MCP</span><span>Scrum Master</span><span>Beirut</span>
+    <div class="eyebrow">Principal Engineer · Systems Architect</div>
+    <h1 class="name">Mohamad <span class="it">Bachir</span><br/>Sidani<span class="stop">.</span></h1>
+    <div class="nodes">
+      <span class="node">2 CRM PLATFORMS</span><span class="wire"></span><span class="node">300+ BANKS</span><span class="wire"></span><span class="node accent">MCP · AI</span>
     </div>
+    <div class="tagline">Murex · 10 yrs<span class="sep">/</span>À La Menu<span class="sep">/</span>iOS · 10+ apps<span class="sep">/</span>Beirut</div>
   </div>
+  <figure class="portrait">
+    <div class="ph"><img src="data:image/jpeg;base64,${photoBase64}" alt="" /></div>
+    <figcaption class="cap"><span>M.B.S.</span><span>ala.menu</span></figcaption>
+  </figure>
 </body>
 </html>`;
 

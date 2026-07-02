@@ -29,3 +29,4 @@ job-search/
 *.njsproj
 *.sln
 *.sw?
+.claude/

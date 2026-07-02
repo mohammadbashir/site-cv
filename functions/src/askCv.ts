@@ -138,7 +138,7 @@ export const askCv = onRequest(
           { role: 'system', content: SYSTEM_PROMPT },
           {
             role: 'user',
-            content: `Question: ${question}\n\nAnswer in first person, 2 to 4 short sentences. Plain text only. No markdown, no em-dashes.`,
+            content: `Question: ${question}\n\nAnswer in first person, 2 to 4 short sentences. Plain text only. No markdown, no em-dashes. End with the [refs: ...] citation line as instructed.`,
           },
         ],
       });

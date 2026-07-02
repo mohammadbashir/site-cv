@@ -1,27 +1,27 @@
 import TopBar from './components/TopBar';
-import Cover from './components/Cover';
-import Numbers from './components/Numbers';
-import SelectedWork from './components/SelectedWork';
-import Experience from './components/Experience';
-import Stack from './components/Stack';
-import Certifications from './components/Certifications';
-import Education from './components/Education';
+import Masthead from './components/Masthead';
+import SystemMap from './components/SystemMap';
+import MurexAct from './components/MurexAct';
+import IndependentAct from './components/IndependentAct';
+import LeadershipBand from './components/LeadershipBand';
+import Ledger from './components/Ledger';
 import Contact from './components/Contact';
+import AskDock from './components/AskDock';
 
 function App() {
   return (
     <div className="min-h-screen">
       <TopBar />
       <main>
-        <Cover />
-        <Numbers />
-        <SelectedWork />
-        <Experience />
-        <Stack />
-        <Certifications />
-        <Education />
+        <Masthead />
+        <SystemMap />
+        <MurexAct />
+        <IndependentAct />
+        <LeadershipBand />
+        <Ledger />
         <Contact />
       </main>
+      <AskDock />
     </div>
   );
 }

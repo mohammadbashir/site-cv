@@ -1,4 +1,4 @@
-import profileImage from '../assets/profile.jpg';
+import profileImage from '../assets/portrait.jpg';
 
 type Props = {
   role: 'user' | 'assistant';
