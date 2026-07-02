@@ -7,11 +7,9 @@ export type Certification = {
 export const certifications: Certification[] = [
   {
     name: 'Pega Certified System Architect (CSA)',
-    href: 'https://academy.pega.com/verify-certification?email=mohammadbashir.sidani%40murex.com',
   },
   {
     name: 'Pega Certified Senior System Architect (CSSA)',
-    href: 'https://academy.pega.com/verify-certification?email=mohammadbashir.sidani%40murex.com',
   },
   {
     name: 'Pega Lead System Architect (LSA)',

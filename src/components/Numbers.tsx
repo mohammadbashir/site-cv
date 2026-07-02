@@ -1,10 +1,10 @@
 import { useInViewReveal } from '../hooks/useInViewReveal';
 
 const STATS = [
-  { value: '10y', label: 'At Murex Lebanon' },
+  { value: '10', label: 'Years at Murex Lebanon' },
   { value: '300+', label: 'Client banks served' },
   { value: '60k+', label: 'Daily internal users' },
-  { value: '5,000+', label: 'iOS App Store reviews' },
+  { value: '5k+', label: 'iOS App Store reviews' },
 ];
 
 export default function Numbers() {

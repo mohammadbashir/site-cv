@@ -46,6 +46,9 @@ export const askCv = onRequest(
     timeoutSeconds: 30,
     memory: '256MiB',
     maxInstances: 5,
+    // One warm instance: a cold start added ~6s before first token, which
+    // reads as "broken" to someone testing the hero chat. Costs a few $/mo.
+    minInstances: 1,
   },
   async (req, res) => {
     // ── Origin / method gating ────────────────────────────────────

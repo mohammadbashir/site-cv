@@ -77,6 +77,11 @@ a { color: inherit; text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+  /* Elements that animate FROM opacity 0 must land on their final state,
+     otherwise killing the animation leaves them invisible. */
+  .cover-eyebrow, .cover-foot, .portrait-cap,
+  .cover-name .line .inner { opacity: 1 !important; transform: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
 }
 
 /* ─── Reveal-on-scroll utility ─────────────────────────────── */
@@ -356,6 +361,16 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   height: clamp(300px, 38vh, 400px);
 }
+/* Before the first message there is no conversation to scroll: collapse to
+   chips + composer instead of reserving a tall empty box in the hero. */
+.ask-panel.is-empty { height: auto; }
+.ask-panel.is-empty .ask-scroll {
+  flex: none;
+  overflow-y: visible;
+  padding-right: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
 .ask-scroll {
   flex: 1;
   min-height: 0;
@@ -574,6 +589,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ─── Persistent top-bar Download CV button ──────────────── */
+.topbar-anchor {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.topbar-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
 .topbar-download {
   display: inline-flex;
   align-items: center;
@@ -606,9 +629,18 @@ a { color: inherit; text-decoration: none; }
   .cover { grid-template-columns: 1fr; min-height: 100vh; }
   .cover-portrait { position: relative; height: 42vh; min-height: 320px; border-right: none; border-bottom: 1px solid var(--rule); }
   .cover-stage { padding: 40px 24px 32px; min-height: 0; }
+  .cover-eyebrow { font-size: 10px; letter-spacing: 0.16em; }
   .cover-foot { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .cover-place { text-align: left; }
   .portrait-cap { bottom: 18px; left: 18px; right: 18px; }
   .bubble { font-size: 16px; }
   .turn-col { max-width: 88%; }
   .composer input { font-size: 16px; }
+  /* The fixed pill collides with full-width text on small screens: dock it
+     bottom-right above the safe area instead. */
+  .topbar-anchor {
+    top: auto;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    right: 14px;
+  }
 }

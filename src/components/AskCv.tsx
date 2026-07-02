@@ -81,7 +81,7 @@ export default function AskCv() {
   const empty = turns.length === 0;
 
   return (
-    <div className="ask-panel">
+    <div className={`ask-panel${empty ? ' is-empty' : ''}`}>
       <div className="ask-scroll" ref={scrollRef}>
         <div className="ask-scroll-inner">
           {empty ? (
