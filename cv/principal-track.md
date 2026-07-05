@@ -1,6 +1,6 @@
 # MOHAMAD BACHIR SIDANI
 
-**Principal Engineer · Pega Architect · Scrum Master** (Pega CSSA, LSA in progress)  
+**Principal Engineer · Systems Architect** (Pega CSSA, LSA in progress)  
 Beirut, Lebanon · +961 3 045 292 · mohamadbachir.sidani@gmail.com  
 mohamadbachir.com · linkedin.com/in/mohamadbachir
 
@@ -8,26 +8,24 @@ mohamadbachir.com · linkedin.com/in/mohamadbachir
 
 ## Summary
 
-Principal engineer and architect with ten years at Murex Lebanon, where I own the end-to-end architecture of two enterprise CRM platforms used internally to support a global client base of 300+ banks and 60,000+ daily users across 65 countries. Pega Certified Senior System Architect with Lead System Architect in progress, Scrum Master leading a five-engineer team, and building À La Menu independently in parallel.
+Engineer of record for Murex's two enterprise CRM platforms: ten years owning their end-to-end architecture, their Pega 8 to 25 lifecycle, and the microservices estate around them. The platforms carry Murex's client support and sales for a global client base of 300+ banks and 60,000+ daily users across 65 countries. Pega Certified Senior System Architect (Lead System Architect in progress), leading a five-engineer team, and building À La Menu independently in parallel.
 
 ## Key Achievements
 
-- Architected Murex's two internal CRM platforms (Customer Service and Sales) on Pega; CS CRM built from scratch over a two-year cycle, Sales CRM extended after acquisition. Both run in production at Murex's scale of 300+ client banks and 60,000+ daily users.
-- Architected Murex's microservices landscape (Spring Cloud Gateway, Admin Service, Client Management Service, Python FastAPI toolkit with Celery and RabbitMQ) supporting multiple enterprise applications, deployed on AWS ECS with Kubernetes-based test environments.
-- Internal subject-matter expert for CRM development tools, with seamless platform upgrades from Pega 8 through 25 and 100% Playwright coverage of main business objects on both platforms.
-- Recognized by Murex leadership for cultural transformation as Scrum Master, sustaining velocity gains across a five-engineer team via servant leadership and Liberating Structures.
+- Both CRM platforms in production at Murex scale: Customer Service CRM built from scratch (live since 2018), Sales CRM extended after acquisition, together supporting 300+ client banks and 60,000+ daily users.
+- Pega 8 through 25 upgrades across both platforms with zero production downtime, backed by 100% Playwright coverage of main business objects.
+- CI/CD deploy time cut 92 percent (3 hours to 15 minutes) through pipeline parallelization, holding 95% microservices coverage and 70% in Pega rules.
+- À La Menu shipped solo and live with restaurants: QR ordering, a menu-editing AI agent, and streaming translation across 20+ languages, all in production.
 
 ## Professional Experience
 
 ### Senior Software Engineer & Scrum Master
 **Murex Lebanon, 2020 to present**
 
-- Own end-to-end architecture of Murex's two Pega CRM platforms and the supporting microservices, designing security models (Azure AD, SAML 2.0, OAuth 2.0), data flows, and integration patterns. Author architecture decision records and design documents for new features and major changes.
-- Led seamless Pega 8 to 25 upgrade across both CRM platforms with full Playwright regression coverage and zero production downtime.
-- Architected Python FastAPI toolkit with Celery workers and RabbitMQ for async PDF generation, deployed as Docker containers on AWS ECS, with Kubernetes-based test environments.
-- Reduced CI/CD deploy time 92 percent (3 hours to 15 minutes) through pipeline parallelization, while holding 95% microservices coverage and 70% in Pega rules.
-- Scrum Master for a five-engineer team using SAFe and Liberating Structures, recognized by leadership for sustained velocity gains.
-- Mentored 5 junior engineers and interns; conduct regular technical interviews; six years of active code review across CRM, microservices, and integration work; coordinate cross-team decisions.
+- Own end-to-end architecture of both Pega CRM platforms and the supporting microservices: security models (Azure AD, SAML 2.0, OAuth 2.0), data flows, integration patterns, and the architecture decision records behind every major change.
+- Architected the microservices landscape: Spring Cloud Gateway at the edge, admin and client-management services behind it, and an async Python FastAPI PDF platform (Celery, RabbitMQ), Dockerised on AWS ECS with Kubernetes-based test environments.
+- Internal subject-matter expert for CRM development tooling: six years of active code review across CRM, microservices, and integration work, regular technical interviews, and 5 junior engineers mentored.
+- Scrum Master for the five-engineer platform team (SAFe), recognized by leadership for sustained velocity gains.
 
 ### Software Engineer (Internal)
 **Murex Lebanon, 2018 to 2020**

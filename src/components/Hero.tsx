@@ -58,6 +58,16 @@ function useCountUp(end: number, delayMs: number) {
 /** The hero ask bar: the signature entry point. Submits into the AskPanel drawer. */
 function AskBar() {
   const [q, setQ] = useState('');
+  // The full placeholder truncates inside a 390px viewport; narrow screens get
+  // the short form.
+  const [narrow, setNarrow] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)');
+    const update = () => setNarrow(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
   const submit = (e: FormEvent) => {
     e.preventDefault();
     openAsk(q.trim() ? { question: q.trim() } : undefined);
@@ -74,7 +84,7 @@ function AskBar() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           maxLength={500}
-          placeholder="Ask my CV anything. It answers with receipts."
+          placeholder={narrow ? 'Ask my CV anything.' : 'Ask my CV anything. It answers with receipts.'}
           className="w-full border-0 bg-transparent py-2.5 text-[13.5px] text-ink outline-none placeholder:text-ink-3"
         />
         <button
@@ -212,7 +222,8 @@ export default function Hero() {
             className="in mt-5 max-w-[520px] text-[16px] leading-[1.65] text-ink-2"
             style={{ '--t': '0.9s' } as React.CSSProperties}
           >
-            <b className="font-semibold text-ink">300+ banks</b> depend on them. Ten years at{' '}
+            <b className="font-semibold text-ink">300+ banks</b> depend on them, supported through
+            the two CRM platforms I own. Ten years at{' '}
             <b className="font-semibold text-ink">Murex</b>, the software behind the world's top
             banks. Founder of <b className="font-semibold text-ink">ala.menu</b>, live with
             restaurants today.

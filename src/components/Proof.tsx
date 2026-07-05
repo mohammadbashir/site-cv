@@ -87,7 +87,7 @@ const rows: Row[] = [
 
 export default function Proof() {
   return (
-    <section id="proof" className="px-6 py-24 md:px-10 md:py-32">
+    <section id="proof" className="px-6 pb-24 md:px-10 md:pb-32">
       <Reveal>
         <p className="label-mono text-ink-3">
           <span className="text-red">02</span> / The Murex decade
