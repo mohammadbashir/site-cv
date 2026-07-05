@@ -1,14 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="18" fill="#F1ECDD"/>
+  <rect width="100" height="100" rx="20" fill="#14161d"/>
   <text
-    x="50"
-    y="62"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="58"
-    font-weight="600"
-    fill="#1F1812"
+    x="48"
+    y="70"
+    font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+    font-size="60"
+    font-weight="700"
+    fill="#ffffff"
     text-anchor="middle"
-    dominant-baseline="alphabetic"
-  >M</text>
-  <rect x="38" y="74" width="24" height="2" fill="#A0322D"/>
+  >M<tspan fill="#e5484d">.</tspan></text>
 </svg>

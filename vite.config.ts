@@ -32,4 +32,18 @@ export default defineConfig({
       },
     },
   },
+  // vite preview hits the deployed function so the ask flow can be tested
+  // end to end before hosting ships (localhost origins are allowlisted there).
+  preview: {
+    proxy: {
+      '/api/ask-cv': {
+        target: 'https://us-central1-mbs-site-ea6ff.cloudfunctions.net',
+        // Sets the Host header for Google's frontend; the browser's Origin
+        // header passes through untouched, which is what the allowlist checks.
+        changeOrigin: true,
+        rewrite: () => '/askCv',
+        secure: true,
+      },
+    },
+  },
 })

@@ -1,6 +1,6 @@
 // Renders the Open Graph share image (1200x630) used for LinkedIn / Slack /
 // iMessage previews when mohamadbachir.com is shared. Mirrors the site's
-// drafting-sheet identity: paper, dot grid, ink node boxes, one signal orange.
+// value-first identity: light ground, ink type, one red, color portrait.
 
 import { chromium } from 'playwright';
 import { readFileSync } from 'node:fs';
@@ -10,147 +10,168 @@ const projectRoot = resolve(import.meta.dirname, '..');
 const photoBase64 = readFileSync(resolve(projectRoot, 'src/assets/portrait.jpg')).toString('base64');
 const outputPath = resolve(projectRoot, 'public/og-image.png');
 
+// Embed the site's own fonts so the card matches the page exactly and the
+// render never depends on the network.
+const font = (pkg, file) =>
+  readFileSync(resolve(projectRoot, 'node_modules', pkg, 'files', file)).toString('base64');
+const spaceGrotesk = font('@fontsource-variable/space-grotesk', 'space-grotesk-latin-wght-normal.woff2');
+const geistMono = font('@fontsource-variable/geist-mono', 'geist-mono-latin-wght-normal.woff2');
+
 const html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap"
-  rel="stylesheet"
-/>
 <style>
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-weight: 300 700;
+    font-style: normal;
+    src: url(data:font/woff2;base64,${spaceGrotesk}) format('woff2-variations');
+  }
+  @font-face {
+    font-family: 'Geist Mono';
+    font-weight: 100 900;
+    font-style: normal;
+    src: url(data:font/woff2;base64,${geistMono}) format('woff2-variations');
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --paper: #f6f4ee;
-    --paper-2: #eeebe1;
-    --ink: #191511;
-    --ink-2: #4c4536;
-    --ink-3: #8b8270;
-    --rule: #d8d2c0;
-    --accent: oklch(0.55 0.16 50);
+    --bg: #f7f7f9;
+    --ink: #14161d;
+    --ink-2: rgba(20, 22, 29, 0.64);
+    --ink-3: rgba(20, 22, 29, 0.45);
+    --hairline: rgba(20, 22, 29, 0.1);
+    --red: #e5484d;
   }
 
   html, body {
     width: 1200px;
     height: 630px;
-    background: var(--paper);
+    background: var(--bg);
     color: var(--ink);
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
   body {
     position: relative;
-    background-image: radial-gradient(rgba(25,21,17,0.09) 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
     display: grid;
-    grid-template-columns: 1fr 300px;
-    column-gap: 56px;
+    grid-template-columns: 1fr 356px;
+    column-gap: 64px;
     align-items: center;
-    padding: 72px 80px;
+    padding: 64px 72px;
+    overflow: hidden;
   }
 
-  .crop { position: absolute; width: 22px; height: 22px; }
-  .crop::before { content: ""; position: absolute; width: 100%; height: 2px; background: var(--ink-3); }
-  .crop::after { content: ""; position: absolute; width: 2px; height: 100%; background: var(--ink-3); }
-  .crop.tl { top: 26px; left: 26px; } .crop.tl::before { top: 0; left: 0; } .crop.tl::after { top: 0; left: 0; }
-  .crop.tr { top: 26px; right: 26px; } .crop.tr::before { top: 0; right: 0; } .crop.tr::after { top: 0; right: 0; }
-  .crop.bl { bottom: 26px; left: 26px; } .crop.bl::before { bottom: 0; left: 0; } .crop.bl::after { bottom: 0; left: 0; }
-  .crop.br { bottom: 26px; right: 26px; } .crop.br::before { bottom: 0; right: 0; } .crop.br::after { bottom: 0; right: 0; }
+  /* quiet structure: hairline guides + warm wash behind the portrait */
+  .guides {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(560px 460px at 82% 42%, rgba(229, 72, 77, 0.06), transparent 72%),
+      linear-gradient(to right, transparent calc(33.3% - 1px), rgba(20, 22, 29, 0.05) 33.3%, transparent calc(33.3% + 1px)),
+      linear-gradient(to right, transparent calc(66.6% - 1px), rgba(20, 22, 29, 0.05) 66.6%, transparent calc(66.6% + 1px));
+  }
 
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
+  .left { position: relative; }
+
+  .label {
+    font-family: 'Geist Mono', ui-monospace, Menlo, monospace;
+    font-size: 17px;
     font-weight: 500;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 18px;
-  }
-
-  .name {
-    font-weight: 300;
-    font-size: 96px;
-    line-height: 0.98;
-    letter-spacing: -0.04em;
-    margin-bottom: 26px;
-  }
-  .name .it { font-style: italic; color: var(--accent); }
-  .name .stop { color: var(--accent); font-weight: 400; }
-
-  .nodes {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 26px;
-  }
-  .node {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13.5px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    border: 2px solid var(--ink);
-    background: var(--paper-2);
-    padding: 12px 18px;
-    white-space: nowrap;
-  }
-  .node.accent { border-color: var(--accent); color: var(--accent); }
-  .wire { width: 34px; height: 2px; background: var(--ink-2); opacity: 0.6; }
-
-  .tagline {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-2);
   }
-  .tagline .sep { color: var(--accent); margin: 0 10px; }
 
-  .portrait { justify-self: end; }
-  .portrait .ph {
-    width: 300px;
-    height: 300px;
-    border: 3px solid var(--ink);
-    border-radius: 18px;
-    overflow: hidden;
-    background: var(--paper-2);
+  h1 {
+    margin-top: 22px;
+    font-size: 84px;
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.015em;
   }
+
+  h1 .dot { color: var(--red); }
+
+  .value {
+    margin-top: 26px;
+    max-width: 620px;
+    font-size: 31px;
+    font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+  }
+
+  .band {
+    margin-top: 38px;
+    padding-top: 26px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    gap: 56px;
+  }
+
+  .stat .n {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .stat .t {
+    margin-top: 10px;
+    font-family: 'Geist Mono', ui-monospace, Menlo, monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .foot {
+    margin-top: 34px;
+    font-family: 'Geist Mono', ui-monospace, Menlo, monospace;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--ink-3);
+  }
+
+  .foot b { color: var(--ink); font-weight: 500; }
+  .foot .sep { color: var(--red); }
+
+  .portrait {
+    position: relative;
+    width: 356px;
+    height: 445px;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--hairline);
+  }
+
   .portrait img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(1) contrast(1.06) brightness(1.02);
-  }
-  .portrait .cap {
-    margin-top: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    display: flex;
-    justify-content: space-between;
+    display: block;
   }
 </style>
 </head>
 <body>
-  <div class="crop tl"></div><div class="crop tr"></div><div class="crop bl"></div><div class="crop br"></div>
-  <div class="content">
-    <div class="eyebrow">Principal Engineer · Systems Architect</div>
-    <h1 class="name">Mohamad <span class="it">Bachir</span><br/>Sidani<span class="stop">.</span></h1>
-    <div class="nodes">
-      <span class="node">2 CRM PLATFORMS</span><span class="wire"></span><span class="node">300+ BANKS</span><span class="wire"></span><span class="node accent">MCP · AI</span>
+  <div class="guides"></div>
+  <div class="left">
+    <div class="label">Principal Engineer &middot; Systems Architect</div>
+    <h1>Mohamad<br />Bachir Sidani<span class="dot">.</span></h1>
+    <div class="value">60,000 people start their workday on systems I architected.</div>
+    <div class="band">
+      <div class="stat"><div class="n">10</div><div class="t">Years at Murex</div></div>
+      <div class="stat"><div class="n">300+</div><div class="t">Client banks</div></div>
+      <div class="stat"><div class="n">60K+</div><div class="t">Daily users</div></div>
     </div>
-    <div class="tagline">Murex · 10 yrs<span class="sep">/</span>À La Menu<span class="sep">/</span>iOS · 10+ apps<span class="sep">/</span>Beirut</div>
+    <div class="foot"><b>mohamadbachir.com</b> <span class="sep">/</span> founder of ala.menu <span class="sep">/</span> Beirut</div>
   </div>
-  <figure class="portrait">
-    <div class="ph"><img src="data:image/jpeg;base64,${photoBase64}" alt="" /></div>
-    <figcaption class="cap"><span>M.B.S.</span><span>ala.menu</span></figcaption>
-  </figure>
+  <div class="portrait"><img src="data:image/jpeg;base64,${photoBase64}" alt="" /></div>
 </body>
 </html>`;
 
@@ -161,15 +182,13 @@ const ctx = await browser.newContext({
 });
 const page = await ctx.newPage();
 await page.setContent(html, { waitUntil: 'networkidle' });
-await page.waitForTimeout(400);
+await page.waitForTimeout(250);
 
 await page.screenshot({
   path: outputPath,
   type: 'png',
-  fullPage: false,
-  omitBackground: false,
   clip: { x: 0, y: 0, width: 1200, height: 630 },
 });
 
 await browser.close();
-console.log(`og-image written to ${outputPath}`);
+console.log(`OG image written to ${outputPath}`);

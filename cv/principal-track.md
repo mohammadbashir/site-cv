@@ -1,7 +1,7 @@
 # MOHAMAD BACHIR SIDANI
 
-**Principal Engineer · Pega Architect · Scrum Master** (Pega CSSA, LSA in progress)
-Beirut, Lebanon · +961 3 045 292 · mohamadbachir.sidani@gmail.com
+**Principal Engineer · Pega Architect · Scrum Master** (Pega CSSA, LSA in progress)  
+Beirut, Lebanon · +961 3 045 292 · mohamadbachir.sidani@gmail.com  
 mohamadbachir.com · linkedin.com/in/mohamadbachir
 
 ---
@@ -23,7 +23,6 @@ Principal engineer and architect with ten years at Murex Lebanon, where I own th
 **Murex Lebanon, 2020 to present**
 
 - Own end-to-end architecture of Murex's two Pega CRM platforms and the supporting microservices, designing security models (Azure AD, SAML 2.0, OAuth 2.0), data flows, and integration patterns. Author architecture decision records and design documents for new features and major changes.
-- Designed and shipped Murex's first production AI integration: a sanctioned MCP (Model Context Protocol) server connecting AI agents to live Pega Sales data for automated opportunity summarization and similar-deal comparison within sales workflows. Took the work from idea to production independently, ahead of Murex's centralised AI initiatives.
 - Led seamless Pega 8 to 25 upgrade across both CRM platforms with full Playwright regression coverage and zero production downtime.
 - Architected Python FastAPI toolkit with Celery workers and RabbitMQ for async PDF generation, deployed as Docker containers on AWS ECS, with Kubernetes-based test environments.
 - Reduced CI/CD deploy time 92 percent (3 hours to 15 minutes) through pipeline parallelization, while holding 95% microservices coverage and 70% in Pega rules.
@@ -50,7 +49,7 @@ Principal engineer and architect with ten years at Murex Lebanon, where I own th
 ## Independent Practice
 **2015 to present, parallel to full-time work**
 
-Ten-plus shipped App Store apps including Qibla Pro (5,000+ reviews, 4.8 stars). Tech lead for WhatsDoc, a HIPAA-compliant telehealth platform for DIAHCO Group. Currently building À La Menu (ala.menu): a multilingual SaaS for restaurants with QR ordering, AI translation, multi-tenant architecture, and freemium subscription tiers.
+Ten-plus shipped App Store apps across eleven years, including Qibla Pro (5,000+ reviews, 4.8 stars). Tech lead for WhatsDoc, a HIPAA-compliant telehealth platform for DIAHCO Group. Currently building À La Menu (ala.menu), a multilingual restaurant SaaS designed, built, and run solo: QR menus with zero-commission real-time ordering, an AI agent that edits whole menus from plain language, streaming AI translation across 20+ languages, multi-tenant architecture, and freemium subscription tiers. Live with restaurants today.
 
 ## Education
 
@@ -63,10 +62,15 @@ Pega Certified System Architect (CSA), Pega Certified Senior System Architect (C
 ## Technical Stack
 
 **Pega.** Versions 7 through 25, case management, decisioning, ABAC/RBAC, Pega Mobile, Tracer & PAL.
-**AI & Agents.** Model Context Protocol (MCP server design and tools), agentic development with n8n orchestration, prompt engineering, hosted LLM APIs and local-model inference, two-plus years hands-on across personal and sanctioned work.
+
+**AI & Agents.** Production AI shipped in À La Menu: a tool-calling menu-editing agent and streaming translation pipelines with caching and guardrails. Prompt engineering, agentic development with n8n orchestration, hosted LLM APIs and local-model inference, Model Context Protocol familiarity. Two-plus years hands-on.
+
 **Backend.** Java Spring Boot, Spring Cloud Gateway, Python FastAPI, Celery, Mule 3/4, RabbitMQ, PostgreSQL, Redis.
+
 **iOS (11 years).** Swift, Objective-C, SwiftUI, UIKit, async/await, Combine, Live Activities, StoreKit 2, Firebase.
+
 **Frontend.** React, Next.js, TypeScript, Tailwind CSS, custom Atlassian Confluence plugins.
+
 **Cloud, DevOps & Quality.** AWS (ECS, S3, EFS, RDS), Azure AD, Kubernetes (test environments), Docker, GitHub Actions, Jenkins, Playwright, SonarQube, Black Duck, SAML 2.0, OAuth 2.0.
 
 ## Languages

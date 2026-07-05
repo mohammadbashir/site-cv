@@ -1,17 +1,28 @@
 // Generates a 180x180 PNG apple-touch-icon for iOS home-screen bookmarks.
-// Mirrors the favicon design at higher resolution.
+// Mirrors the favicon design at higher resolution: ink tile, white M, red dot.
 
 import { chromium } from 'playwright';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const projectRoot = resolve(import.meta.dirname, '..');
 const outputPath = resolve(projectRoot, 'public/apple-touch-icon.png');
+
+const spaceGrotesk = readFileSync(
+  resolve(projectRoot, 'node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2'),
+).toString('base64');
 
 const html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <style>
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-weight: 300 700;
+    font-style: normal;
+    src: url(data:font/woff2;base64,${spaceGrotesk}) format('woff2-variations');
+  }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
     width: 180px;
@@ -22,33 +33,25 @@ const html = `<!doctype html>
     width: 180px;
     height: 180px;
     border-radius: 32px;
-    background: #F1ECDD;
+    background: #14161d;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
   }
   .tile .letter {
-    font-family: 'Iowan Old Style', Georgia, 'Times New Roman', serif;
-    font-size: 110px;
-    font-weight: 600;
-    color: #1F1812;
+    font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 104px;
+    font-weight: 700;
+    color: #ffffff;
     line-height: 1;
-    margin-top: -8px;
+    margin-top: -10px;
   }
-  .tile .rule {
-    width: 44px;
-    height: 3px;
-    background: #A0322D;
-    margin-top: 6px;
-  }
+  .tile .letter .dot { color: #e5484d; }
 </style>
 </head>
 <body>
   <div class="tile">
-    <span class="letter">M</span>
-    <span class="rule"></span>
+    <span class="letter">M<span class="dot">.</span></span>
   </div>
 </body>
 </html>`;

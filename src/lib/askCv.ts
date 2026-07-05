@@ -10,13 +10,15 @@ export type StreamChunk =
 
 const ENDPOINT = '/api/ask-cv';
 
-export async function* askCv(question: string): AsyncGenerator<StreamChunk> {
+export type AskMode = 'question' | 'fit';
+
+export async function* askCv(question: string, mode: AskMode = 'question'): AsyncGenerator<StreamChunk> {
   let res: Response;
   try {
     res = await fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question }),
+      body: JSON.stringify({ question, mode }),
     });
   } catch {
     yield { type: 'error', message: 'The live demo is offline right now. Email me or grab the PDF up top.' };

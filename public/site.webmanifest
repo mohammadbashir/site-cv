@@ -1,7 +1,7 @@
 {
   "name": "Mohamad Bachir Sidani",
   "short_name": "M.B. Sidani",
-  "description": "Senior Software Engineer & Pega Architect at Murex Lebanon. Production AI integrations with Claude and MCP. iOS Tech Lead.",
+  "description": "Principal Engineer and Systems Architect at Murex Lebanon. Two Pega CRM platforms behind 300+ banks and 60,000+ daily users. Founder of ala.menu.",
   "start_url": "/",
   "scope": "/",
   "icons": [
@@ -18,7 +18,7 @@
       "purpose": "any"
     }
   ],
-  "theme_color": "#F1ECDD",
-  "background_color": "#F1ECDD",
+  "theme_color": "#f7f7f9",
+  "background_color": "#f7f7f9",
   "display": "minimal-ui"
 }

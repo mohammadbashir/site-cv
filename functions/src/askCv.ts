@@ -16,6 +16,9 @@ const ALLOWED_ORIGINS = new Set([
   'https://www.mohamadbachir.com',
   'https://mbs-site-ea6ff.web.app',
   'https://mbs-site-ea6ff.firebaseapp.com',
+  // Local preview/dev of the new site; harmless: rate limits + budget still apply.
+  'http://localhost:4173',
+  'http://localhost:5173',
 ]);
 
 const ALLOW_LOCALHOST_IN_EMULATOR = process.env.FUNCTIONS_EMULATOR === 'true';
@@ -37,6 +40,7 @@ const BOT_UA_PATTERNS = [
 
 const MIN_Q_LEN = 3;
 const MAX_Q_LEN = 500;
+const MAX_JD_LEN = 6000;
 
 export const askCv = onRequest(
   {
@@ -82,10 +86,12 @@ export const askCv = onRequest(
     }
 
     // ── Input validation ──────────────────────────────────────────
-    const body = (req.body ?? {}) as { question?: unknown };
+    const body = (req.body ?? {}) as { question?: unknown; mode?: unknown };
+    const mode = body.mode === 'fit' ? 'fit' : 'question';
     const question = typeof body.question === 'string' ? body.question.trim() : '';
-    if (question.length < MIN_Q_LEN || question.length > MAX_Q_LEN) {
-      res.status(400).json({ error: `Question must be ${MIN_Q_LEN}–${MAX_Q_LEN} characters.` });
+    const maxLen = mode === 'fit' ? MAX_JD_LEN : MAX_Q_LEN;
+    if (question.length < MIN_Q_LEN || question.length > maxLen) {
+      res.status(400).json({ error: `Input must be ${MIN_Q_LEN}–${maxLen} characters.` });
       return;
     }
 
@@ -129,17 +135,19 @@ export const askCv = onRequest(
     };
 
     try {
+      const userContent =
+        mode === 'fit'
+          ? `JOB DESCRIPTION:\n${question}\n\nProduce the fit brief exactly as instructed in FIT BRIEF MODE. First person, plain text, no markdown, no em-dashes. End with the [refs: ...] citation line.`
+          : `Question: ${question}\n\nAnswer in first person, 2 to 4 short sentences. Plain text only. No markdown, no em-dashes. End with the [refs: ...] citation line as instructed.`;
+
       const stream = await client.chat.completions.create({
         model: 'gpt-4o-mini',
         stream: true,
-        max_tokens: 300,
+        max_tokens: mode === 'fit' ? 520 : 300,
         temperature: 0.6,
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
-          {
-            role: 'user',
-            content: `Question: ${question}\n\nAnswer in first person, 2 to 4 short sentences. Plain text only. No markdown, no em-dashes. End with the [refs: ...] citation line as instructed.`,
-          },
+          { role: 'user', content: userContent },
         ],
       });
 

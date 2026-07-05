@@ -59,32 +59,35 @@ const url = `http://127.0.0.1:${port}/`;
 console.log(`prerender: serving dist/ on ${url}`);
 
 const browser = await chromium.launch();
+// reducedMotion makes JS-driven values (count-up stats) render their final
+// state immediately, so the snapshot never bakes a mid-animation number.
 const ctx = await browser.newContext({
   viewport: { width: 1280, height: 900 },
   deviceScaleFactor: 1,
+  reducedMotion: 'reduce',
 });
 const page = await ctx.newPage();
 await page.goto(url, { waitUntil: 'networkidle' });
 
-// Trigger any IntersectionObserver-based reveals so the rendered DOM has all
-// content visible (not stuck at framer-motion's initial opacity:0 state).
+// Trigger IntersectionObserver-based reveals so the rendered DOM has all
+// content visible. Scrolling must be behavior:'instant': the page CSS sets
+// scroll-behavior:smooth, and smooth scrolls lag behind a rapid scrollBy
+// loop, so the pass would end before ever reaching the bottom.
 await page.evaluate(async () => {
-  await new Promise((resolve) => {
-    let total = 0;
-    const distance = 240;
-    const timer = setInterval(() => {
-      const { scrollHeight } = document.documentElement;
-      window.scrollBy(0, distance);
-      total += distance;
-      if (total >= scrollHeight) {
-        clearInterval(timer);
-        resolve();
-      }
-    }, 60);
-  });
+  const step = 300;
+  for (let y = 0; y <= document.documentElement.scrollHeight; y += step) {
+    window.scrollTo({ top: y, behavior: 'instant' });
+    await new Promise((r) => setTimeout(r, 40));
+  }
+  window.scrollTo({ top: 0, behavior: 'instant' });
 });
 await page.waitForTimeout(400);
-await page.evaluate(() => window.scrollTo(0, 0));
+
+// Belt and braces: any reveal the observer still missed ships visible. React
+// re-renders these elements on hydration, so live scroll animations are kept.
+await page.evaluate(() => {
+  document.querySelectorAll('.sr:not(.is-in)').forEach((el) => el.classList.add('is-in'));
+});
 await page.waitForTimeout(200);
 
 // Force any motion.* element still at opacity:0 to be visible IN MEMORY ONLY,
