@@ -50,9 +50,10 @@ export const askCv = onRequest(
     timeoutSeconds: 30,
     memory: '256MiB',
     maxInstances: 5,
-    // One warm instance: a cold start added ~6s before first token, which
-    // reads as "broken" to someone testing the hero chat. Costs a few $/mo.
-    minInstances: 1,
+    // No warm instance: the chat gets a handful of requests a month, and a
+    // 24/7 idle container was the entire Firebase bill. First question after
+    // idle pays a cold start; every one after is warm.
+    minInstances: 0,
   },
   async (req, res) => {
     // ── Origin / method gating ────────────────────────────────────
